@@ -5,8 +5,8 @@ class MoviesController < ApplicationController
   end
 
   def show
-    id = params[:id] # retrieve movie ID from URI route
-    @movie = Movie.find(id) # look up movie by unique ID
+    @id = params[:id] # retrieve movie ID from URI route
+    @movie = Movie.find(@id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
   end
 
@@ -59,6 +59,14 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
+  end
+  
+  def same_director
+    id=params[:id]
+    director=Movie.find(id).director
+    @movies=Movie.same_directors(director)
+   # raise @movies.inspect
+  
   end
 
 end
