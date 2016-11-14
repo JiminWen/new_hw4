@@ -32,3 +32,9 @@ Then /^(?:|the) director of "([^"]*)" should be "([^"]*)"$/ do |first,second|
     page.body.should=~/#{first}.*Director.*#{second}/m
 end
 
+Then /^I should be on the (.+)$/ do |page_name|
+  current_path = URI.parse(current_url).path
+ # @movie_id = Movie.find_by_title(page_name).id
+  assert current_path==path_to(page_name)
+end
+
