@@ -2,12 +2,14 @@
 
 %h2 Movies with the same director 
 - @movies.each do |m|
-  %%ul
-    %li
-      Title: #{m.title}
-      
+  %h2 #{m.title}
+  %ul
     %li
       Rating: #{m.rating}
     %li
-      
-      
+      Released on: #{m.release_date}
+    %li
+      Director: #{m.director}
+    
+
+=link_to "Back to home page", movies_path  
