@@ -20,7 +20,7 @@ module NavigationHelpers
       edit_movie_path(Movie.find_by_title($1).id)
     
     when /^details page for "([^"]*)"$/
-      movies_path(Movie.find_by_title($1).id)
+      movie_path(Movie.find_by_title($1).id)
       
     when /^Find Movies With Same Director$/
       
