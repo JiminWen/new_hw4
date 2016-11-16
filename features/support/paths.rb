@@ -13,7 +13,7 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^home\s?page$/
+    when /^home page$/
       movies_path
       
     when /^edit page for "([^"]*)"$/

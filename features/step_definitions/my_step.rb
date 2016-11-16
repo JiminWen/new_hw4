@@ -22,10 +22,8 @@ When /^(?:|I) press "([^"]*)"$/ do |button|
   click_button(button) 
 end
 
-When(/^I follow "([^"]*)"$/) do |link|
+When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
-  
-
 end
 
 Then /^(?:|the) director of "([^"]*)" should be "([^"]*)"$/ do |first,second|
@@ -33,9 +31,27 @@ Then /^(?:|the) director of "([^"]*)" should be "([^"]*)"$/ do |first,second|
 end
 
 Then /^I should be on the (.+)$/ do |page_name|
-  current_path = URI.parse(current_url).path
+ # current_path = URI.parse(current_url).path
  # @movie_id = Movie.find_by_title(page_name).id
-  assert current_path==path_to(page_name)
+ # assert current_path==path_to(page_name)
+  
+  #uri = URI.parse(current_url)
+  #"#{uri.path}".should == path_to(page_name)
+
+  current_path = URI.parse(current_url).path 
+  if current_path.respond_to? :should
+    current_path.should == path_to(page_name)
+  else
+    assert_equal path_to(page_name), current_path
+  end
+end
+
+Then /^I should see "([^"]*)"$/ do |text|
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
 end
 
 Then /^I should not see "([^"]*)"$/ do |text|
@@ -45,6 +61,7 @@ Then /^I should not see "([^"]*)"$/ do |text|
     assert page.has_no_content?(text)
   end
 end
+
 
 
 
