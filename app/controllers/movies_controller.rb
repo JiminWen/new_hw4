@@ -64,9 +64,9 @@ class MoviesController < ApplicationController
   def same_director
    
     @id=params[:format]
-    @director=Movie.find(@id).director
-    if not @director.blank?
-    @movies=Movie.same_directors(@director)
+    director=Movie.find(@id).director
+    if not director.blank?
+    @movies=Movie.same_directors(director)
     
     else
     flash[:notice] = "'#{Movie.find(@id).title}' has no director info"  
