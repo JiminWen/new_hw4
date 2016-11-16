@@ -30,13 +30,7 @@ Then /^(?:|the) director of "([^"]*)" should be "([^"]*)"$/ do |first,second|
     page.body.should=~/#{first}.*Director.*#{second}/m
 end
 
-Then /^I should be on the (.+)$/ do |page_name|
- # current_path = URI.parse(current_url).path
- # @movie_id = Movie.find_by_title(page_name).id
- # assert current_path==path_to(page_name)
-  
-  #uri = URI.parse(current_url)
-  #"#{uri.path}".should == path_to(page_name)
+Then /^I should be on (.+)$/ do |page_name|
 
   current_path = URI.parse(current_url).path 
   if current_path.respond_to? :should
@@ -46,13 +40,7 @@ Then /^I should be on the (.+)$/ do |page_name|
   end
 end
 
-Then /^I should see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
-end
+
 
 Then /^I should not see "([^"]*)"$/ do |text|
   if page.respond_to? :should
@@ -63,5 +51,20 @@ Then /^I should not see "([^"]*)"$/ do |text|
 end
 
 
+Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
+  regexp = Regexp.new(regexp)
 
+  if page.respond_to? :should
+    page.should have_xpath('//*', :text => regexp)
+  else
+    assert page.has_xpath?('//*', :text => regexp)
+  end
+end
 
+Then /^I should see "([^"]*)"$/ do |text|
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
+end

@@ -13,7 +13,7 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^home page$/
+    when /^the home page$/
       movies_path
       
     when /^edit page for "([^"]*)"$/
@@ -22,7 +22,7 @@ module NavigationHelpers
     when /^details page for "([^"]*)"$/
       movie_path(Movie.find_by_title($1).id)
       
-    when /^Similar Movies page for "([^"]*)"$/
+    when /^the Similar Movies page for "([^"]*)"$/
        @movie_id = Movie.find_by_title($1).id
       same_director_path(@movie_id)
       
