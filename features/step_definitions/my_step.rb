@@ -6,11 +6,11 @@ Given /^the following movies exist:$/ do |movies_table|
   end
 end
 
-Given /^(?:|I) am on the (.+)$/ do |page_name|
+Given /^(?:|I) am on (.+)$/ do |page_name|
     visit path_to(page_name)
 end
 
-When (/^(?:|I) go to the (.+)$/) do |page_name|
+When (/^(?:|I) go to (.+)$/) do |page_name|
     visit path_to(page_name)
 end
 
@@ -67,4 +67,13 @@ Then /^I should see "([^"]*)"$/ do |text|
   else
     assert page.has_content?(text)
   end
+end
+
+Then /^I should find movies sorted by (.+)$/ do |method|
+  if method=='title'
+  page.body.should=~/Alien.*Blade Runner.*Star Wars.*THX-1138/m
+  elsif method=='date'
+  page.body.should=~/THX-1138.*Star Wars.*Alien.*Blade Runner/m  
+  end
+  
 end

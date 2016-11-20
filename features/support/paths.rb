@@ -16,10 +16,10 @@ module NavigationHelpers
     when /^the home page$/
       movies_path
       
-    when /^edit page for "([^"]*)"$/
+    when /^the edit page for "([^"]*)"$/
       edit_movie_path(Movie.find_by_title($1).id)
     
-    when /^details page for "([^"]*)"$/
+    when /^the details page for "([^"]*)"$/
       movie_path(Movie.find_by_title($1).id)
       
     when /^the Similar Movies page for "([^"]*)"$/
